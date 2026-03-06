@@ -5,8 +5,10 @@ public class CustomerDto {
     private String fullName;
     private String email;
 
-    public CustomerDto(){
-        super();
+    public CustomerDto(String documentNumber, String fullName, String email) {
+        this.documentNumber = documentNumber;
+        this.fullName = fullName;
+        this.email = email;
     }
 
     public String getDocumentNumber() {

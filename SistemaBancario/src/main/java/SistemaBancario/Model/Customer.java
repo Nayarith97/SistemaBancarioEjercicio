@@ -1,6 +1,7 @@
 package SistemaBancario.Model;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class Customer {
     private String documentNumber ;
@@ -13,6 +14,9 @@ public class Customer {
         this.fullName = fullName;
         this.email = email;
         this.createdAt = createdAt;
+    }
+
+    public Customer() {
     }
 
     public String getDocumentNumber() {
