@@ -1,7 +1,9 @@
 package SistemaBancario.Service;
 
+import SistemaBancario.Model.Account;
 import SistemaBancario.Model.Customer;
 import SistemaBancario.Repository.CustomerRepository;
+import SistemaBancario.dto.AccountDto;
 import SistemaBancario.dto.CustomerDto;
 import org.springframework.stereotype.Service;
 
@@ -41,4 +43,20 @@ public class CustomerServiceImpl implements ICustomerService{
             customer.getFullName(),
             customer.getEmail());
   }
+
+    @Override
+    public CustomerDto saveCustomer(CustomerDto customerDto) {
+
+        Customer customer1 = new Customer(
+                customerDto.getDocumentNumber(),
+                customerDto.getFullName(),
+                customerDto.getEmail(),
+                LocalDateTime.now()
+        );
+        Customer savedCustomer= customerRepository.postCustomer(customer1);
+        return new CustomerDto(
+                savedCustomer.getDocumentNumber(),
+                savedCustomer.getFullName(),
+                savedCustomer.getEmail());
+    }
 }

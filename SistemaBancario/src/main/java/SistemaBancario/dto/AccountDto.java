@@ -1,31 +1,27 @@
-package SistemaBancario.Model;
+package SistemaBancario.dto;
 
 import SistemaBancario.AccountType;
 import SistemaBancario.eAccountStatus;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
-
-public class Account {
+public class AccountDto {
     private UUID ID;
-    private AccountType accountType;
+    private AccountType accountType ;
     private eAccountStatus status;
     private BigDecimal balance;
     private String customerId;
-    private LocalDateTime createdAt;
 
-    public Account(UUID ID, AccountType accountType, eAccountStatus status, BigDecimal balance, String customerId, LocalDateTime createdAt) {
+    public AccountDto(UUID ID, AccountType accountType, eAccountStatus status, BigDecimal balance, String customerId) {
         this.ID = ID;
         this.accountType = accountType;
         this.status = status;
         this.balance = balance;
         this.customerId = customerId;
-        this.createdAt = createdAt;
     }
 
-    public Account() {
+    public AccountDto() {
     }
 
     public UUID getID() {
@@ -66,13 +62,5 @@ public class Account {
 
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 }

@@ -2,10 +2,9 @@ package SistemaBancario.Controllers;
 
 import SistemaBancario.Service.ICustomerService;
 import SistemaBancario.dto.CustomerDto;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -17,19 +16,31 @@ public class CustomerController {
     // Inyeccion de dependencias
     private final ICustomerService iCustomerService;
 
-    public CustomerController(ICustomerService iCustomerService) {
+    public CustomerController(ICustomerService iCustomerService)
+    {
         this.iCustomerService = iCustomerService;
     }
 
     @GetMapping
-    public List<CustomerDto> getCustomerList() {
-        return iCustomerService.getCustomerList() ;
+    public ResponseEntity<List<CustomerDto>> getCustomerList() {
+
+        return ResponseEntity.ok(this.iCustomerService.getCustomerList());
     }
 
+
     @GetMapping("/{documentNumber}")
-    //ResponseEntity<?>permite dar respuestas personalizadas, no un solo tipo de dato
-    // (tipo customer/cliente o una cadena de texto cuando no encuentra el cliente)
-    public CustomerDto getCustomerByDocument(@PathVariable String documentNumber) {
-       return iCustomerService.getCustomerByDocument(documentNumber);
+    public ResponseEntity<CustomerDto>  getCustomerByDocument(@PathVariable String documentNumber) {
+        CustomerDto customerDto=iCustomerService.getCustomerByDocument(documentNumber);
+
+        if (customerDto == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(customerDto);
+    }
+
+    @PostMapping
+    public ResponseEntity<CustomerDto> saveCustomer(@RequestBody CustomerDto customerDto)
+    {
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.iCustomerService.saveCustomer(customerDto)) ;
     }
 }

@@ -12,5 +12,6 @@ import java.util.UUID;
 public interface ICustomerService {
     List<CustomerDto> getCustomerList();
     CustomerDto getCustomerByDocument(String documentNumber);
+    CustomerDto saveCustomer(CustomerDto customerDto);
 }
 

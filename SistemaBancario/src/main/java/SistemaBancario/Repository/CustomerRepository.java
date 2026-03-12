@@ -27,6 +27,11 @@ public class CustomerRepository {
                 user->user.getDocumentNumber().equals(document)).findFirst();
 
     }
+
+    public Customer postCustomer(Customer customer) {
+     customers.add(customer);
+        return customer;
+    }
 }
 
 
